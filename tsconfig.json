@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "importHelpers": true,
+    "strict": true,
+    // "esModuleInterop": true,
+    // "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "lib": [
+      "es6",
+    ],
+    "moduleResolution": "node",
+    "module": "commonjs"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

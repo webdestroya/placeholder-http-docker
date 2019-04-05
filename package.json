@@ -1,0 +1,12 @@
+{
+  "name": "http-placeholder",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:webdestroya/placeholder-http-docker.git",
+  "author": "webdestroya <webdestroya@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^11.13.0",
+    "typescript": "^3.4.1"
+  }
+}
