@@ -1,11 +1,14 @@
 FROM node:lts-slim
 
-ENV HEALTHCHECK_PATH=/health SHOW_ALL=true
+EXPOSE 8080/tcp
 
-EXPOSE 8080
+# HEALTHCHECK --interval=1m --timeout=3s \
+#   CMD curl --fail http://localhost:$PORT || exit 1
 
 WORKDIR /app
 
 ADD server.js /app/server.js
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["node", "server.js"]
+
+CMD ["nothing"]
