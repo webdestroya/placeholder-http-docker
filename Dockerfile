@@ -1,6 +1,8 @@
 FROM node:lts-slim
 
-ENV PORT=8080 HEALTHCHECK_PATH=/health SHOW_ALL=true
+ENV HEALTHCHECK_PATH=/health SHOW_ALL=true
+
+EXPOSE 8080
 
 WORKDIR /app
 
