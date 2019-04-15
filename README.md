@@ -28,3 +28,6 @@ $ docker run --rm -p 8080:8080 webdestroya/http-placeholder:latest
 | `PLACEHOLDER_ROBOTS` | `true` | Whether to respond to the robots.txt request |
 | `PLACEHOLDER_ENV_LIST` | | A comma separated list of env vars to show.<br>(When `PLACEHOLDER_SHOW_ENV` is set to `list`) |
 | `PORT` | `8080` | Default port to serve app on |
+
+
+### Notes for testing
