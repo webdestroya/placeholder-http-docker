@@ -31,6 +31,3 @@ $ docker run --rm -p 8080:8080 webdestroya/http-placeholder:latest
 
 
 ### Notes for testing
-here we go again
-and another one
-and another one
