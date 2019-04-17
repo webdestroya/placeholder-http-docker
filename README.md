@@ -31,6 +31,4 @@ $ docker run --rm -p 8080:8080 webdestroya/http-placeholder:latest
 
 
 ### Notes for testing
-some new hits hits hits.
-and some more hits hits hits.
-and some more hits hits hits.
+
