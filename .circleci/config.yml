@@ -24,12 +24,10 @@ jobs:
       - run:
           name: Authenticate AWS ECR
           command: eval $(aws ecr get-login --no-include-email --region us-east-1)
-      - run: 
-          name: get repo name
-          command: export REPO="$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
-      - run: 
-          name: echoes
+      - run:
+          name: Build Docker Image
           command: |
+            export REPO="$(echo '${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
             echo ${CIRCLE_PROJECT_REPONAME}
             echo "circle project repo name"
             echo ${REPO}
@@ -37,10 +35,6 @@ jobs:
             echo ${CIRCLE_SHA1}
             echo "sha1"
             echo ${AWS_ACCOUNT_ID}
-      - run:
-          name: Build Docker Image
-          command: |
-            export REPO=eval "$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
             docker build -t ${REPO}:${CIRCLE_SHA1} .
             docker tag ${REPO}:${CIRCLE_SHA1} $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
             docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
