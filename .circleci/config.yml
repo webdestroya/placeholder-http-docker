@@ -26,13 +26,14 @@ jobs:
           command: eval $(aws ecr get-login --no-include-email --region us-east-1)
       - run: 
           name: get repo name
-          command: REPO="$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+          environment:
+            REPOSITORY: $(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')
       - run: 
           name: echoes
           command: |
             echo ${CIRCLE_PROJECT_REPONAME}
             echo "circle project repo name"
-            echo ${REPO}
+            echo $REPO
             echo "repo"
             echo ${CIRCLE_SHA1}
             echo "sha1"
