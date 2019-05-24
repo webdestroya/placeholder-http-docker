@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            export REPO="$(echo '${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+            export REPO="$(echo '${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}' | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
             echo ${CIRCLE_PROJECT_REPONAME}
             echo "circle project repo name"
             echo ${REPO}
