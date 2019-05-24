@@ -27,6 +27,16 @@ jobs:
       - run: 
           name: get repo name
           command: REPO="$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+      - run: 
+          name: echoes
+          command: |
+            echo ${CIRCLE_PROJECT_REPONAME}
+            echo "circle project repo name"
+            echo ${REPO}
+            echo "repo"
+            echo ${CIRCLE_SHA1}
+            echo "sha1"
+            echo ${AWS_ACCOUNT_ID}
       - run:
           name: Build Docker Image
           command: |
@@ -41,6 +51,7 @@ workflows:
   build-master:
     jobs:  
       - setup:
+          context: platform
           filters:
             branches:
               only: master
