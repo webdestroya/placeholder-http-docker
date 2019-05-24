@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  platform: acornsgrow/platform@0.0.3
+  platform: acornsgrow/platform@0.0.4
 
 executors:
   node:
