@@ -51,7 +51,7 @@ workflows:
   build-master:
     jobs:  
       - setup:
-          context: platform
+          context: techops
           filters:
             branches:
               only: master
