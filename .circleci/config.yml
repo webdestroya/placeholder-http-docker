@@ -40,11 +40,10 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
+            REPO="$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
             docker build -t ${REPO}:${CIRCLE_SHA1} .
             docker tag ${REPO}:${CIRCLE_SHA1} $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
-      - run:
-          name: Push Docker Image to Shipmunk 2
-          command: docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
 
 workflows:
   version: 2
