@@ -1,28 +1,47 @@
-version: 2.1
+version: 2
+defaults: &defaults
+  working_directory: ~/project
 
-orbs:
-  aws-ecr: circleci/aws-ecr@3.0.0
+build-defaults: &build-defaults
+  <<: *defaults
+  docker:
+    - image: circleci/python:3.6-stretch
+
+jobs:
+  
+  setup:
+    <<: *build-defaults
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install AWS CLI
+          command: sudo pip install awscli --upgrade
+      - run:
+          name: Authenticate Docker
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Authenticate AWS ECR
+          command: eval $(aws ecr get-login --no-include-email --region us-east-1)
+      - run: 
+          name: get repo name
+          command: REPO="$(echo $CIRCLE_PROJECT_REPONAME | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t ${REPO}:${CIRCLE_SHA1} .
+            docker tag ${REPO}:${CIRCLE_SHA1} $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
+      - run:
+          name: Push Docker Image to Shipmunk 2
+          command: docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/${REPO}:${CIRCLE_SHA1}
 
 workflows:
-  build-dev:
-    jobs:
-      - run: 
-          name: login to docker
-          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-
-      - run:
-          name: login to ecr
-          command: $(aws ecr get-login --no-include-email --region us-east-1)
-
-      - run:
-          name: Parse Repo Name
-          command: REPO="$(echo $CIRCLE_PROJECT_REPONAME | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
-      
-      - aws-ecr/build_and_push_image:
-          context: techops
-          name: build-sha
+  version: 2
+  build-master:
+    jobs:  
+      - setup:
           filters:
             branches:
               only: master
-          repo: "255479557906.dkr.ecr.us-east-1.amazonaws.com/${REPO}"
-          tag: ${CIRCLE_SHA1}
+              
