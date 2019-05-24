@@ -26,7 +26,7 @@ jobs:
           command: eval $(aws ecr get-login --no-include-email --region us-east-1)
       - run: 
           name: get repo name
-          command: export REPO="$(eval echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+          command: export REPO="$(echo ${CIRCLE_PROJECT_REPONAME} | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
       - run: 
           name: echoes
           command: |
