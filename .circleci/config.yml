@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@3.0.0
+
+workflows:
+  build-dev:
+    jobs:
+      - run: 
+          name: login to docker
+          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+
+      - run:
+          name: login to ecr
+          command: $(aws ecr get-login --no-include-email --region us-east-1)
+
+      - run:
+          name: Parse Repo Name
+          command: REPO="$(echo $CIRCLE_PROJECT_REPONAME | tr '[:upper:]' '[:lower:]' | sed 's/[\/-]/_/g')"
+      
+      - aws-ecr/build_and_push_image:
+          context: techops
+          name: build-sha
+          filters:
+            branches:
+              only: master
+          repo: "255479557906.dkr.ecr.us-east-1.amazonaws.com/${REPO}"
+          tag: ${CIRCLE_SHA1}
