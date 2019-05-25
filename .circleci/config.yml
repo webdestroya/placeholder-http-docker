@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  platform: acornsgrow/platform@0.0.5
+  platform: acornsgrow/platform@1.0.0
 
 executors:
   node:
@@ -11,7 +11,7 @@ executors:
 workflows:
   build:
     jobs:
-      - platform/create_build:
+      - platform/build_and_push:
           context: platform
           filters:
             branches:
