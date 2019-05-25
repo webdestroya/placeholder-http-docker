@@ -3,11 +3,6 @@ version: 2.1
 orbs:
   platform: acornsgrow/platform@1.0.0
 
-executors:
-  node:
-    docker:
-      - image: circleci/node:latest
-
 workflows:
   build:
     jobs:
