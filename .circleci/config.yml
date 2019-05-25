@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  platform: acornsgrow/platform@1.0.0
+  platform: acornsgrow/platform@1.0.1
 
 workflows:
   build:
