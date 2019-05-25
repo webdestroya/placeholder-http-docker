@@ -7,7 +7,7 @@ workflows:
   build:
     jobs:
       - platform/build_and_push:
-          context: platform
+          context: techops
           filters:
             branches:
               only: master
