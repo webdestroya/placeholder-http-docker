@@ -14,10 +14,10 @@ phases:
   build:
     commands:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - SHA=$(git rev-parse HEAD)
-      - docker build -t $IMAGE_REPO_NAME:$SHA .
+      - docker build -t $SHIPMUNK_PROJECT_ID:$SHA .
   post_build:
     commands:
-      - docker tag $IMAGE_REPO_NAME:$SHA $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$SHA
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$SHA
+      - docker tag $SHIPMUNK_PROJECT_ID:$SHA $ECR_REPOSITORY:$SHA 
+      - docker push $ECR_REPOSITORY:$SHA
