@@ -1,0 +1,49 @@
+pipeline:
+  dev:
+    - name: build # doesn't matter
+      type: codebuild
+      buildspec: shipmunk.yml
+    - name: approval # doesn't matter
+      type: approval
+      slackChannel: sre-private
+    - name: predeploy
+      type: task
+      command: bundle exec rails c
+    - name: deploy
+      type: deployment
+      deploymentType: canary
+    - name: integrationJenkins
+      type: webhook
+      url: https://jankins.com/webhooks/ioi123s
+  staging:
+    - name: build # doesn't matter
+      type: codebuild
+      buildspec: shipmunk.yml
+    - name: approval # doesn't matter
+      type: approval
+      slackChannel: sre-private
+    - name: predeploy
+      type: task
+      command: bundle exec rails c
+    - name: deploy
+      type: deployment
+      deploymentType: canary
+    - name: integrationJenkins
+      type: webhook
+      url: https://jankins.com/webhooks/ioi123s
+  production:
+    - name: build # doesn't matter
+      type: codebuild
+      buildspec: shipmunk.yml
+    - name: approval # doesn't matter
+      type: approval
+      slackChannel: sre-private
+    - name: predeploy
+      type: task
+      command: bundle exec rails c
+    - name: deploy
+      type: deployment
+      deploymentType: canary
+    - name: integrationJenkins
+      type: webhook
+      url: https://jankins.com/webhooks/ioi123s
