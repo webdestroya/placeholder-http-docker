@@ -13,7 +13,7 @@ phases:
       - yarn install
   build:
     commands:
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - $(aws ecr get-login --registry-ids $ECR_REGISTRY_ID --region $AWS_DEFAULT_REGION --no-include-email)
       - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - SHA=$(git rev-parse HEAD)
       - docker build -t $SHIPMUNK_PROJECT_ID:$SHA .
