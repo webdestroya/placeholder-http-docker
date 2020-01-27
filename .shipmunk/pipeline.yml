@@ -2,21 +2,21 @@ pipeline:
   dev:
     - name: build 
       type: codebuild
-      buildspec: build.yml
+      value: build
     - name: deploy
       type: deployment
-      deploymentType: full
+      value: full
   staging:
-    - name: build
+    - name: build 
       type: codebuild
-      buildspec: build.yml
+      value: build
     - name: deploy
       type: deployment
-      deploymentType: full
+      value: full
   production:
-    - name: build
+    - name: build 
       type: codebuild
-      buildspec: build.yml
+      value: build
     - name: deploy
       type: deployment
-      deploymentType: full
+      value: full
