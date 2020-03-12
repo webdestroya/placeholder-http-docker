@@ -7,16 +7,10 @@ pipeline:
       type: deployment
       value: full
   staging:
-    - name: build 
-      type: codebuild
-      value: build
     - name: deploy
       type: deployment
       value: full
   production:
-    - name: build 
-      type: codebuild
-      value: build
     - name: deploy
       type: deployment
       value: full
