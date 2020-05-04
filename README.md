@@ -4,4 +4,4 @@ foo
 foo
 foo
 barrrrr
-updates
+updatesfoo
